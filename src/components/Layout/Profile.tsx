@@ -1,17 +1,19 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import { useContext } from "react";
+import { AuthContext } from '../../contexts/AuthContext'
 
 export function Profile() {
+  const { user } = useContext(AuthContext)
   return (
     <Flex align="center">
       <Box mr="4" textAlign="right" display={{ base: "none", md: "block" }}>
-        <Text>MILTON ALEXANDRE DE AMORIM</Text>
+        <Text>{user?.name}</Text>
         <Text color="gray.400" fontSize="small">
-          milton.rj30@gmail.com
+          {user?.email}
         </Text>
       </Box>
 
-      <Avatar size="md" name="milton" src="" />
+      <Avatar size="md" name={user?.name} src={user?.avatar} />
     </Flex>
   );
 }

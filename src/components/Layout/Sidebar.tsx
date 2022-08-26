@@ -18,9 +18,9 @@ import { NavSection } from "./NavSection";
 
 const planOrcitems = [
   { id: 1, link: "/dashboard", title: "Plano Plurianual" },
-  { id: 2, link: "/planning/create", title: "Emendas Parlamentares" },
-  { id: 3, link: "/", title: "Lei Diretrizes Orçamentárias" },
-  { id: 4, link: "/", title: "Lei Orçamentária Anual" },
+  { id: 2, link: "/amendments", title: "Emendas Parlamentares" },
+  { id: 3, link: "/atwork", title: "Lei Diretrizes Orçamentárias" },
+  { id: 4, link: "/atwork", title: "Lei Orçamentária Anual" },
 ];
 
 const parltems = [{ link: "/atwork", title: "Em Teste" }];

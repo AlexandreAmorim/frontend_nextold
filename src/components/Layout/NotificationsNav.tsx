@@ -1,10 +1,13 @@
 import { HStack, Link, useColorMode } from "@chakra-ui/react";
 import { RiLogoutCircleRLine, RiMoonLine, RiSunLine } from "react-icons/ri";
+import { signOut } from '../../contexts/AuthContext'
 
 export function NotificationsNav() {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  function handleSignOut() {}
+  function handleSignOut() {
+    signOut()
+  }
 
   return (
     <HStack
