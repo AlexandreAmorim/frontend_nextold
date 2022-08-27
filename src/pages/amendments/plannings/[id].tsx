@@ -258,7 +258,7 @@ export default function Planning() {
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.secretary}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="secretary">Secretária</FormLabel>
                       <Controller
                         control={control}
@@ -278,7 +278,7 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.type_work}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="type_work">Tipo de Obra</FormLabel>
                       <Controller
                         control={control}
@@ -300,7 +300,7 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.size}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="size">Porte</FormLabel>
                       <Controller
                         control={control}
@@ -350,7 +350,7 @@ export default function Planning() {
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.city}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="city">Município</FormLabel>
                       <Controller
                         control={control}
@@ -408,7 +408,7 @@ export default function Planning() {
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.parliamentary}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="parliamentary">Parlamentar</FormLabel>
                       <Controller
                         control={control}
@@ -430,7 +430,7 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.budget_action}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="budget_action">
                         Ação Orçamentária
                       </FormLabel>
@@ -471,7 +471,7 @@ export default function Planning() {
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={errors.nature_expense}>
+                    <FormControl isInvalid={!!errors}>
                       <FormLabel htmlFor="nature_expense">
                         Natureza da Resposta
                       </FormLabel>

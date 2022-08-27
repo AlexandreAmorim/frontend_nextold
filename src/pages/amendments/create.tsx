@@ -101,7 +101,7 @@ export default function CreateAmendments() {
           >
             <Stack spacing="4">
               <GridItem colSpan={2}>
-                <FormControl isInvalid={errors.acting_data}>
+                <FormControl isInvalid={!!errors}>
                   <FormLabel htmlFor="acting_data">Área de Atuação</FormLabel>
                   <Controller
                     control={control}
@@ -125,7 +125,7 @@ export default function CreateAmendments() {
               </GridItem>
               {strategic && (
                 <GridItem colSpan={2}>
-                  <FormControl isInvalid={errors.strategic_data}>
+                  <FormControl isInvalid={!!errors}>
                     <FormLabel htmlFor="strategic_data">
                       Programas Estratégicos
                     </FormLabel>
@@ -151,7 +151,7 @@ export default function CreateAmendments() {
               )}
               {coordinate && (
                 <GridItem colSpan={2}>
-                  <FormControl isInvalid={errors.coordinates_data}>
+                  <FormControl isInvalid={!!errors}>
                     <FormLabel htmlFor="coordinates_data">
                       Ações Coordenadas
                     </FormLabel>
