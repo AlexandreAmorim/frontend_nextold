@@ -1,35 +1,42 @@
-import { Flex, Stack, Text, Link as ChakraLink, Button, useColorModeValue } from '@chakra-ui/react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useContext } from 'react'
-import { AuthContext } from '../contexts/AuthContext'
-import { Input } from '../components/Form/Input'
-import Link from 'next/link'
+import {
+  Flex,
+  Stack,
+  Text,
+  Link as ChakraLink,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { Input } from "../components/Form/Input";
+import Link from "next/link";
 
 type SignInFormData = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 const signInFormSchema = yup.object().shape({
-  email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
-  password: yup.string().required('Senha obrigatória'),
-})
+  email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
+  password: yup.string().required("Senha obrigatória"),
+});
 
 export default function Home() {
-  const colorMode = useColorModeValue("gray.200", "gray.900");
-  const { signIn } = useContext(AuthContext)
+  const colorMode = useColorModeValue("gray.50", "gray.900");
+  const { signIn } = useContext(AuthContext);
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signInFormSchema),
-  })
+  });
 
-  const { errors } = formState
+  const { errors } = formState;
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    await signIn(values)
-  }
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await signIn(values);
+  };
 
   return (
     <Flex
@@ -37,11 +44,11 @@ export default function Home() {
       h="100vh"
       alignItems="center"
       justifyContent="center"
-      flexDirection={['column', 'row']}
+      flexDirection={["column", "row"]}
     >
       <Stack p={[6, 8]} spacing="4" mr={[0, 0, 0, 100]}>
         <Text
-          fontSize={['2xl', '3xl']}
+          fontSize={["2xl", "3xl"]}
           fontWeight="bold"
           letterSpacing="tight"
           w="64"
@@ -54,7 +61,7 @@ export default function Home() {
         <Text
           letterSpacing="tight"
           lineHeight="normal"
-          fontSize={['3xl', '5xl']}
+          fontSize={["3xl", "5xl"]}
           mb="8"
           fontWeight="extrabold"
           maxW={430}
@@ -77,14 +84,14 @@ export default function Home() {
             label="E-mail"
             name="email"
             type="email"
-            {...register('email')}
+            {...register("email")}
             error={errors.email}
           />
           <Input
             label="Senha"
             name="password"
             type="password"
-            {...register('password')}
+            {...register("password")}
             error={errors.password}
           />
         </Stack>
@@ -106,6 +113,6 @@ export default function Home() {
           </ChakraLink>
         </Link>
       </Flex>
-    </Flex >
-  )
+    </Flex>
+  );
 }

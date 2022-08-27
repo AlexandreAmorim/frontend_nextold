@@ -27,7 +27,7 @@ export function Header({ title, onOpen }) {
       />
       <Text
         display={{ base: "none", md: "flex" }}
-        fontSize={["2xl", "3xl"]}
+        fontSize={["lg", "2xl"]}
         fontWeight="bold"
       >
         {title}

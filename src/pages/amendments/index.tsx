@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { api } from "../../services/apiClient";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import Link from "next/link";
-
-import { RiAddLine, RiSearch2Line } from "react-icons/ri";
+import { RiAddLine, RiSearch2Line, RiEdit2Line } from "react-icons/ri";
 import { Pagination } from "../../components/Pagination";
-import { queryClient } from "../../services/queryClient";
-import { useUsers } from "../../services/hooks/useUsers";
+import { usePlannings } from "../../services/hooks/usePlannings";
 import { Input } from "../../components/Form/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Layout } from "../../components/Layout";
-
 import {
   Box,
   Flex,
@@ -25,25 +21,27 @@ import {
   Tr,
   useBreakpointValue,
   Link as ChakraLink,
-  Badge,
-  Avatar,
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Eye, PencilSimpleLine } from "phosphor-react";
 
-type SearchUsersFormData = {
+type SearchPlanningFormData = {
   search: string;
 };
 
-export default function Users() {
+export default function Amendments() {
   const colorMode = useColorModeValue("gray.50", "gray.900");
   const [page, setPage] = useState(1);
   const { register, handleSubmit } = useForm();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data, isLoading, isFetching, error } = useUsers(page, searchQuery);
+  const { data, isLoading, isFetching, error } = usePlannings(
+    page,
+    searchQuery
+  );
 
-  const handleSearchUsers: SubmitHandler<SearchUsersFormData> = async ({
+  const handleSearchPlanning: SubmitHandler<SearchPlanningFormData> = async ({
     search,
   }) => {
     setPage(1);
@@ -55,21 +53,8 @@ export default function Users() {
     lg: true,
   });
 
-  async function handlePrefetchUser(userId: string) {
-    await queryClient.prefetchQuery(
-      ["user", userId],
-      async () => {
-        const response = await api.get(`users/${userId}`);
-        return response.data;
-      },
-      {
-        staleTime: 1000 * 60 * 10, // 10 minutes
-      }
-    );
-  }
-
   return (
-    <Layout title="Usuarios">
+    <Layout title="Plan.Orçamentário">
       <Flex
         borderRadius={8}
         bg={colorMode}
@@ -81,11 +66,12 @@ export default function Users() {
           {!isLoading && isFetching && (
             <Spinner size="sm" color="gray.500" ml="4" />
           )}
-          <Flex as="form" onSubmit={handleSubmit(handleSearchUsers)}>
+
+          <Flex as="form" onSubmit={handleSubmit(handleSearchPlanning)}>
             <Input
               name="search"
               size="md"
-              placeholder="Buscar Usuário"
+              placeholder="Buscar Planejamento"
               {...register("search")}
             />
 
@@ -101,7 +87,7 @@ export default function Users() {
               <Icon as={RiSearch2Line} fontSize="22" />
             </Button>
           </Flex>
-          <Link href="/users/create" passHref>
+          <Link href="/amendments/create" passHref>
             <Button
               as="a"
               size="md"
@@ -121,67 +107,61 @@ export default function Users() {
           </Flex>
         ) : error ? (
           <Flex justify="center">
-            <Text>Falha ao obter dados dos usuários.</Text>
+            <Text>Falha ao obter dados dos planejamentos.</Text>
           </Flex>
         ) : (
           <>
             <Table size="sm">
               <Thead>
                 <Tr>
-                  <Th>Avatar</Th>
-                  <Th>Usuário</Th>
-                  {isWideVersion && <Th>Email</Th>}
-                  {isWideVersion && <Th>Role</Th>}
+                  <Th></Th>
+                  <Th>Cod</Th>
+                  {isWideVersion && <Th>Status</Th>}
+                  {isWideVersion && <Th>Data de Cadastro</Th>}
+                  <Th align="center">Editar</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.users.map((user) => {
+                {data?.plannings.map((planning) => {
+                  const [ref] = planning.id.split("-");
                   return (
-                    <Tr key={user.id}>
+                    <Tr key={planning.id}>
                       <Td>
-                        <Avatar
-                          size="md"
-                          name={user?.name}
-                          src={user?.avatar}
-                        />
-                      </Td>
-                      <Td>
-                        <Link href={`/users/${user.id}`} passHref>
-                          <ChakraLink color="blue.500">
-                            <Text fontWeight="bold">{user.name}</Text>
+                        <Link
+                          href={`/amendments/plannings/detail/${planning.id}`}
+                          passHref
+                        >
+                          <ChakraLink color="green.500">
+                            <Eye size={22} />
                           </ChakraLink>
                         </Link>
                       </Td>
+
+                      <Td>
+                        <Text size="md">{ref.toLocaleUpperCase()}</Text>
+                      </Td>
                       {isWideVersion && (
                         <Td>
-                          <Text>{user.email}</Text>
+                          <Text>{planning.consolidates.name}</Text>
                         </Td>
                       )}
                       {isWideVersion && (
                         <Td>
-                          {user.roles.map((role) =>
-                            role.alias === "administrator" ? (
-                              <Badge
-                                fontSize={["sm", "12"]}
-                                p={["0.5", "0.5"]}
-                                key={role.id}
-                                colorScheme="purple"
-                              >
-                                {role.name}
-                              </Badge>
-                            ) : (
-                              <Badge
-                                fontSize={["sm", "12"]}
-                                p={["0.5", "0.5"]}
-                                key={role.id}
-                                colorScheme="green"
-                              >
-                                {role.name}
-                              </Badge>
-                            )
-                          )}
+                          <Text>{planning.createdAt}</Text>
                         </Td>
                       )}
+                      <Td>
+                        <Flex justifyContent="space-between">
+                          <Link
+                            href={`/amendments/plannings/${planning.id}`}
+                            passHref
+                          >
+                            <ChakraLink color="blue.500">
+                              <PencilSimpleLine size={22} />
+                            </ChakraLink>
+                          </Link>
+                        </Flex>
+                      </Td>
                     </Tr>
                   );
                 })}

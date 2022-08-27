@@ -25,7 +25,7 @@ export function Layout({ title, children }) {
       </Drawer>
 
       <Header onOpen={onOpen} title={title} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} px="4">
         {children}
       </Box>
     </Box>
