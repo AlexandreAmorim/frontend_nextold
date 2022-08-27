@@ -162,19 +162,13 @@ export default function CreateUser() {
       >
         <SimpleGrid columns={2} columnGap={3} rowGap={6}>
           <GridItem colSpan={2}>
-            <Input
-              name="name"
-              label="Nome Completo"
-              error={errors.name}
-              {...register("name")}
-            />
+            <Input name="name" label="Nome Completo" {...register("name")} />
           </GridItem>
           <GridItem colSpan={[2, 1]}>
             <InputMasked
               mask="999.999.999-99"
               name="document"
               label="Cpf"
-              error={errors.document}
               {...register("document")}
             />
           </GridItem>
@@ -183,7 +177,6 @@ export default function CreateUser() {
               mask="99/99/9999"
               name="date_birth"
               label="Data de Nascimento"
-              error={errors.date_birth}
               {...register("date_birth")}
             />
           </GridItem>
@@ -191,7 +184,6 @@ export default function CreateUser() {
             <Input
               name="email"
               label="Email"
-              error={errors.email}
               {...register("email")}
               maxLength={100}
             />
@@ -201,7 +193,6 @@ export default function CreateUser() {
               mask="999999"
               name="registration"
               label="Identidade"
-              error={errors.registration}
               {...register("registration")}
             />
           </GridItem>
@@ -210,12 +201,11 @@ export default function CreateUser() {
               mask="(99) 99999-9999"
               name="tel"
               label="Telefone"
-              error={errors.tel}
               {...register("tel")}
             />
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={errors.sex}>
+            <FormControl isInvalid={!!errors}>
               <FormLabel htmlFor="sex">Sexo</FormLabel>
               <Controller
                 control={control}
@@ -235,7 +225,7 @@ export default function CreateUser() {
             </FormControl>
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={errors.active}>
+            <FormControl isInvalid={!!errors}>
               <FormLabel htmlFor="active">Status </FormLabel>
               <Controller
                 control={control}
@@ -255,7 +245,7 @@ export default function CreateUser() {
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={errors.roles}>
+            <FormControl isInvalid={!!errors}>
               <FormLabel htmlFor="roles">Função</FormLabel>
               <Controller
                 control={control}

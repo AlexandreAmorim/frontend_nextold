@@ -104,7 +104,6 @@ export default function EditRole({ roleData }: any) {
               <Input
                 label="Nome"
                 name="name"
-                error={errors.name}
                 {...register("name")}
                 defaultValue={roleData.name}
               />
@@ -115,14 +114,13 @@ export default function EditRole({ roleData }: any) {
               <Input
                 label="Alias"
                 name="alias"
-                error={errors.alias}
                 {...register("alias")}
                 defaultValue={roleData.alias}
               />
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={errors.permissions}>
+            <FormControl isInvalid={!!errors}>
               <FormLabel htmlFor="permissions">Permissões</FormLabel>
               <Controller
                 control={control}

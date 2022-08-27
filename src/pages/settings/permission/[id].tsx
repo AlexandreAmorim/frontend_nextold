@@ -84,7 +84,6 @@ export default function EditPermission({ permissionData }: any) {
               <Input
                 label="Nome"
                 name="name"
-                error={errors.name}
                 {...register("name")}
                 defaultValue={permissionData.name}
               />
@@ -95,7 +94,6 @@ export default function EditPermission({ permissionData }: any) {
               <Input
                 label="Alias"
                 name="alias"
-                error={errors.alias}
                 {...register("alias")}
                 defaultValue={permissionData.alias}
               />

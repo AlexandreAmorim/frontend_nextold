@@ -61,14 +61,13 @@ export default function Permission() {
         <SimpleGrid columns={2} columnGap={3} rowGap={6}>
           <GridItem colSpan={[2, 1]}>
             <FormControl>
-              <Input label="Nome" error={errors.name} {...register("name")} />
+              <Input label="Nome" {...register("name")} />
             </FormControl>
           </GridItem>
           <GridItem colSpan={[2, 1]}>
             <FormControl>
               <Input
                 label="Alias"
-                error={errors.alias}
                 placeholder="ex: user.list"
                 {...register("alias")}
               />

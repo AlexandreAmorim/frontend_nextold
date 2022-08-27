@@ -253,7 +253,6 @@ export default function Planning() {
                     <Input
                       name="project"
                       label="Nome Projeto"
-                      error={errors.project}
                       {...register("project")}
                     />
                   </GridItem>
@@ -323,7 +322,6 @@ export default function Planning() {
                     <Input
                       name="component"
                       label="Componente"
-                      error={errors.component}
                       {...register("component")}
                     />
                   </GridItem>
@@ -345,7 +343,6 @@ export default function Planning() {
                       mask="99999-999"
                       name="zip"
                       label="CEP"
-                      error={errors.zip}
                       {...register("zip")}
                     />
                   </GridItem>
@@ -373,24 +370,17 @@ export default function Planning() {
                     <Input
                       name="neighborhood"
                       label="Bairro"
-                      error={errors.neighborhood}
                       maxLength={100}
                       {...register("neighborhood")}
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <Input
-                      name="cnes"
-                      label="CNES"
-                      error={errors.cnes}
-                      {...register("cnes")}
-                    />
+                    <Input name="cnes" label="CNES" {...register("cnes")} />
                   </GridItem>
                   <GridItem colSpan={2}>
                     <Input
                       name="establishment"
                       label="Nome Estabelecimento"
-                      error={errors.establishment}
                       {...register("establishment")}
                     />
                   </GridItem>
@@ -403,7 +393,6 @@ export default function Planning() {
                       mask="99.999.999/9999-99"
                       name="cnpj"
                       label="Cnpj"
-                      error={errors.cnpj}
                       {...register("cnpj")}
                     />
                   </GridItem>
@@ -457,7 +446,6 @@ export default function Planning() {
                     <InputCurrency
                       name="proposed_value"
                       label="Valor Proposta"
-                      error={errors.proposed_value}
                       {...register("proposed_value")}
                     />
                   </GridItem>
@@ -466,7 +454,6 @@ export default function Planning() {
                       mask="99/99/9999"
                       name="date_proposed"
                       label="Data da Proposta"
-                      error={errors.date_proposed}
                       {...register("date_proposed")}
                     />
                   </GridItem>

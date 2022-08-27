@@ -85,14 +85,12 @@ export default function Home() {
             name="email"
             type="email"
             {...register("email")}
-            error={errors.email}
           />
           <Input
             label="Senha"
             name="password"
             type="password"
             {...register("password")}
-            error={errors.password}
           />
         </Stack>
         <Button
