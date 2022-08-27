@@ -170,17 +170,15 @@ export default function Amendments() {
               </Modal>
             </Flex>
             <GridItem colSpan={2}>
-              <FormControl isInvalid={errors.acting_data}>
-                <FormLabel htmlFor="acting_data">
-                  Projetos Consolidados
-                </FormLabel>
+              <FormControl isInvalid={!!errors}>
+                <FormLabel htmlFor="acting">Projetos Consolidados</FormLabel>
                 <Controller
                   control={control}
-                  name="acting_data"
+                  name="acting"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
-                      inputId="acting_data"
-                      id="acting_data"
+                      inputId="acting"
+                      id="acting"
                       ref={ref}
                       onChange={(v) => onChange(v.value)}
                       options={consolidatesOptions}
@@ -191,7 +189,7 @@ export default function Amendments() {
               </FormControl>
             </GridItem>
             <GridItem colSpan={2}>
-              <FormControl isInvalid={errors.acting_data}>
+              <FormControl isInvalid={!!errors}>
                 <FormLabel htmlFor="acting_data">Projetos Abertos</FormLabel>
                 <Controller
                   control={control}
