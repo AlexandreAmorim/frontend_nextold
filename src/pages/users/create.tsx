@@ -162,13 +162,19 @@ export default function CreateUser() {
       >
         <SimpleGrid columns={2} columnGap={3} rowGap={6}>
           <GridItem colSpan={2}>
-            <Input name="name" label="Nome Completo" {...register("name")} />
+            <Input
+              name="name"
+              error={errors.name}
+              label="Nome Completo"
+              {...register("name")}
+            />
           </GridItem>
           <GridItem colSpan={[2, 1]}>
             <InputMasked
               mask="999.999.999-99"
               name="document"
               label="Cpf"
+              error={errors.document}
               {...register("document")}
             />
           </GridItem>
@@ -184,6 +190,7 @@ export default function CreateUser() {
             <Input
               name="email"
               label="Email"
+              error={errors.email}
               {...register("email")}
               maxLength={100}
             />
@@ -205,7 +212,7 @@ export default function CreateUser() {
             />
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.sex}>
               <FormLabel htmlFor="sex">Sexo</FormLabel>
               <Controller
                 control={control}
@@ -225,7 +232,7 @@ export default function CreateUser() {
             </FormControl>
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.active}>
               <FormLabel htmlFor="active">Status </FormLabel>
               <Controller
                 control={control}
@@ -245,7 +252,7 @@ export default function CreateUser() {
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.roles}>
               <FormLabel htmlFor="roles">Função</FormLabel>
               <Controller
                 control={control}

@@ -1,4 +1,10 @@
-import { Button, Flex, Stack, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Stack,
+  useToast,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +22,7 @@ const signInFormSchema = yup.object().shape({
 
 export default function Forgot() {
   const toast = useToast();
+  const colorMode = useColorModeValue("gray.50", "gray.900");
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signInFormSchema),
   });
@@ -86,6 +93,7 @@ export default function Forgot() {
         borderWidth={1}
         p="8"
         borderRadius={8}
+        bg={colorMode}
         flexDir="column"
         onSubmit={handleSubmit(handleSignIn)}
       >
@@ -94,11 +102,21 @@ export default function Forgot() {
             name="email"
             type="email"
             label="E-mail"
+            error={errors.email}
             {...register("email")}
           />
         </Stack>
 
-        <Button type="submit" mt="6" isLoading={formState.isSubmitting}>
+        <Button
+          type="submit"
+          mt="6"
+          bg="blue.500"
+          color="white"
+          _hover={{
+            bg: "blue.600",
+          }}
+          isLoading={formState.isSubmitting}
+        >
           Enviar
         </Button>
       </Flex>

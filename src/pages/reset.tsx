@@ -1,4 +1,11 @@
-import { Button, Flex, Stack, Text, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Stack,
+  Text,
+  useToast,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,6 +35,7 @@ const resetFormSchema = yup.object().shape({
 });
 
 export default function Reset() {
+  const colorMode = useColorModeValue("gray.50", "gray.900");
   const router = useRouter();
   const { token } = router.query;
   const toast = useToast();
@@ -113,6 +121,7 @@ export default function Reset() {
         borderWidth={1}
         p="8"
         borderRadius={8}
+        bg={colorMode}
         flexDir="column"
         onSubmit={handleSubmit(handleReset)}
       >
@@ -131,17 +140,28 @@ export default function Reset() {
             name="password"
             type="password"
             label="Nova Senha"
+            error={errors.password}
             {...register("password")}
           />
           <Input
             name="password_confirmation"
             type="password"
             label="Confirmar Senha"
+            error={errors.password_confirmation}
             {...register("password_confirmation")}
           />
         </Stack>
 
-        <Button type="submit" mt="6" isLoading={formState.isSubmitting}>
+        <Button
+          type="submit"
+          mt="6"
+          bg="blue.500"
+          color="white"
+          _hover={{
+            bg: "blue.600",
+          }}
+          isLoading={formState.isSubmitting}
+        >
           Salvar
         </Button>
         <Link href="/forgot">Esqueci minha senha</Link>

@@ -114,6 +114,9 @@ export default function Amendments() {
                   w="50%"
                   fontSize="sm"
                   bg="blue.400"
+                  _hover={{
+                    bg: "blue.600",
+                  }}
                 >
                   {modal}
                 </Button>
@@ -170,7 +173,7 @@ export default function Amendments() {
               </Modal>
             </Flex>
             <GridItem colSpan={2}>
-              <FormControl isInvalid={!!errors}>
+              <FormControl isInvalid={!errors}>
                 <FormLabel htmlFor="acting">Projetos Consolidados</FormLabel>
                 <Controller
                   control={control}
@@ -189,7 +192,7 @@ export default function Amendments() {
               </FormControl>
             </GridItem>
             <GridItem colSpan={2}>
-              <FormControl isInvalid={!!errors}>
+              <FormControl isInvalid={!errors}>
                 <FormLabel htmlFor="acting_data">Projetos Abertos</FormLabel>
                 <Controller
                   control={control}

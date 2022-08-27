@@ -121,10 +121,15 @@ interface IPlanningPageProps {
 const formSchema = yup.object().shape({
   project: yup.string().required("Nome do projeto é obrigatório"),
   secretary: yup.number().required().typeError("Secretária é obrigatório"),
-  type_work: yup.number().required().typeError("Tipo de obra é obrigatório"),
+  typework: yup.number().required().typeError("Tipo de obra é obrigatório"),
   size: yup.string().required().typeError("Porte é obrigatório"),
   component: yup.string().trim().required("Componente é obrigatório"),
   zip: yup.string().trim().required("Cep é obrigatório"),
+  establishment: yup
+    .string()
+    .trim()
+    .required("Nome Estabelecimento é obrigatório"),
+  nature_expense: yup.string().required("Natureza da Responsta é obrigatório"),
   proposed_value: yup.string().required("Valor é obrigatório"),
   date_proposed: yup
     .string()
@@ -140,11 +145,16 @@ export default function Planning() {
   const [acting, setActing] = useState<IOption[]>([]);
   const [coordinate, setCoordinate] = useState<any>([]);
   const colorMode = useColorModeValue("gray.50", "gray.900");
-  const { handleSubmit, formState, register, reset, control } = useForm({
+  const {
+    handleSubmit,
+    formState,
+    register,
+    reset,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const { errors } = formState;
 
   useEffect(() => {
     async function loadActings() {
@@ -197,6 +207,7 @@ export default function Planning() {
     const _planning = {
       ...data,
       name: type,
+      type_work: data.typework,
       coordinate_id: id,
       date_proposed: data.date_proposed,
     };
@@ -253,11 +264,12 @@ export default function Planning() {
                     <Input
                       name="project"
                       label="Nome Projeto"
+                      error={errors.project}
                       {...register("project")}
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.secretary}>
                       <FormLabel htmlFor="secretary">Secretária</FormLabel>
                       <Controller
                         control={control}
@@ -277,16 +289,16 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
-                      <FormLabel htmlFor="type_work">Tipo de Obra</FormLabel>
+                    <FormControl isInvalid={!!errors.typework}>
+                      <FormLabel htmlFor="typework">Tipo de Obra</FormLabel>
                       <Controller
                         control={control}
                         defaultValue={typeworkOptions.map((c) => c.value)}
-                        name="type_work"
+                        name="typework"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="type_work"
-                            id="type_work"
+                            inputId="typework"
+                            id="typework"
                             ref={ref}
                             value={typeworkOptions.find(
                               (c) => value === c.value
@@ -299,7 +311,7 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.size}>
                       <FormLabel htmlFor="size">Porte</FormLabel>
                       <Controller
                         control={control}
@@ -322,6 +334,7 @@ export default function Planning() {
                     <Input
                       name="component"
                       label="Componente"
+                      error={errors.component}
                       {...register("component")}
                     />
                   </GridItem>
@@ -343,11 +356,12 @@ export default function Planning() {
                       mask="99999-999"
                       name="zip"
                       label="CEP"
+                      error={errors.zip}
                       {...register("zip")}
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.city}>
                       <FormLabel htmlFor="city">Município</FormLabel>
                       <Controller
                         control={control}
@@ -381,6 +395,7 @@ export default function Planning() {
                     <Input
                       name="establishment"
                       label="Nome Estabelecimento"
+                      error={errors.establishment}
                       {...register("establishment")}
                     />
                   </GridItem>
@@ -397,7 +412,7 @@ export default function Planning() {
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.parliamentary}>
                       <FormLabel htmlFor="parliamentary">Parlamentar</FormLabel>
                       <Controller
                         control={control}
@@ -419,7 +434,7 @@ export default function Planning() {
                     </FormControl>
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.budget_action}>
                       <FormLabel htmlFor="budget_action">
                         Ação Orçamentária
                       </FormLabel>
@@ -446,6 +461,7 @@ export default function Planning() {
                     <InputCurrency
                       name="proposed_value"
                       label="Valor Proposta"
+                      error={errors.proposed_value}
                       {...register("proposed_value")}
                     />
                   </GridItem>
@@ -454,11 +470,12 @@ export default function Planning() {
                       mask="99/99/9999"
                       name="date_proposed"
                       label="Data da Proposta"
+                      error={errors.date_proposed}
                       {...register("date_proposed")}
                     />
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
-                    <FormControl isInvalid={!!errors}>
+                    <FormControl isInvalid={!!errors.nature_expense}>
                       <FormLabel htmlFor="nature_expense">
                         Natureza da Resposta
                       </FormLabel>

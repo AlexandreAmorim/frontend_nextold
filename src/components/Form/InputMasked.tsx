@@ -1,42 +1,42 @@
-import { forwardRef, ForwardRefRenderFunction } from 'react'
-import { FieldError } from 'react-hook-form'
+import { forwardRef, ForwardRefRenderFunction } from "react";
+import { FieldError } from "react-hook-form";
 import {
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Input as ChakraInput,
-    InputProps as ChakraInputProps,
-} from '@chakra-ui/react'
-import InputMask from 'react-input-mask'
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input as ChakraInput,
+  InputProps as ChakraInputProps,
+} from "@chakra-ui/react";
+import InputMask from "react-input-mask";
 
 interface InputProps extends ChakraInputProps {
-    name: string
-    label?: string
-    error?: FieldError
-    mask: string
+  name: string;
+  label?: string;
+  error?: FieldError | any;
+  mask: string;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-    { name, label, error = null, mask, ...rest },
-    ref
+  { name, label, error = null, mask, ...rest },
+  ref
 ) => {
-    return (
-        <FormControl isInvalid={!!error}>
-            {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+  return (
+    <FormControl isInvalid={!!error}>
+      {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
 
-            <ChakraInput
-                as={InputMask}
-                mask={mask}
-                maskPlaceholder={null}
-                name={name}
-                id={name}
-                ref={ref}
-                {...rest}
-            />
+      <ChakraInput
+        as={InputMask}
+        mask={mask}
+        maskPlaceholder={null}
+        name={name}
+        id={name}
+        ref={ref}
+        {...rest}
+      />
 
-            {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-        </FormControl>
-    )
-}
+      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+    </FormControl>
+  );
+};
 
-export const InputMasked = forwardRef(InputBase)
+export const InputMasked = forwardRef(InputBase);

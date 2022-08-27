@@ -82,7 +82,7 @@ export default function Role() {
         <SimpleGrid columns={2} columnGap={3} rowGap={6}>
           <GridItem colSpan={[2, 1]}>
             <FormControl>
-              <Input label="Nome" {...register("name")} />
+              <Input label="Nome" {...register("name")} error={errors.name} />
             </FormControl>
           </GridItem>
           <GridItem colSpan={[2, 1]}>
@@ -90,12 +90,13 @@ export default function Role() {
               <Input
                 label="Alias"
                 placeholder="ex: user"
+                error={errors.alias}
                 {...register("alias")}
               />
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.permissions}>
               <FormLabel htmlFor="permissions">Permissões</FormLabel>
               <Controller
                 control={control}

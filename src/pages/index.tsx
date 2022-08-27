@@ -85,11 +85,13 @@ export default function Home() {
             name="email"
             type="email"
             {...register("email")}
+            {...register("email")}
           />
           <Input
             label="Senha"
             name="password"
             type="password"
+            error={errors.password}
             {...register("password")}
           />
         </Stack>

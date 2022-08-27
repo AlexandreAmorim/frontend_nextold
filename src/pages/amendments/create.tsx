@@ -101,7 +101,7 @@ export default function CreateAmendments() {
           >
             <Stack spacing="4">
               <GridItem colSpan={2}>
-                <FormControl isInvalid={!!errors}>
+                <FormControl isInvalid={!errors}>
                   <FormLabel htmlFor="acting_data">Área de Atuação</FormLabel>
                   <Controller
                     control={control}
@@ -125,7 +125,7 @@ export default function CreateAmendments() {
               </GridItem>
               {strategic && (
                 <GridItem colSpan={2}>
-                  <FormControl isInvalid={!!errors}>
+                  <FormControl isInvalid={!errors}>
                     <FormLabel htmlFor="strategic_data">
                       Programas Estratégicos
                     </FormLabel>
@@ -151,7 +151,7 @@ export default function CreateAmendments() {
               )}
               {coordinate && (
                 <GridItem colSpan={2}>
-                  <FormControl isInvalid={!!errors}>
+                  <FormControl isInvalid={!errors}>
                     <FormLabel htmlFor="coordinates_data">
                       Ações Coordenadas
                     </FormLabel>
@@ -179,6 +179,9 @@ export default function CreateAmendments() {
                 w="full"
                 bg="blue.200"
                 color="gray.900"
+                _hover={{
+                  bg: "gray.300",
+                }}
                 onClick={handlerClear}
               >
                 Limpar
@@ -188,6 +191,9 @@ export default function CreateAmendments() {
                 w="full"
                 bg="blue.500"
                 color="white"
+                _hover={{
+                  bg: "blue.600",
+                }}
                 isLoading={formState.isSubmitting}
                 disabled={!button}
               >

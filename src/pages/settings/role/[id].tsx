@@ -120,7 +120,7 @@ export default function EditRole({ roleData }: any) {
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.permissions}>
               <FormLabel htmlFor="permissions">Permissões</FormLabel>
               <Controller
                 control={control}

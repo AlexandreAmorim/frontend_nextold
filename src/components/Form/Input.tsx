@@ -12,7 +12,7 @@ import {
 interface InputProps extends ChakraInputProps {
   name: string;
   label?: string;
-  error?: FieldError;
+  error?: FieldError | any;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (

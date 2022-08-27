@@ -165,6 +165,7 @@ export default function EditUser({ userData }: any) {
               name="name"
               label="Nome Completo"
               defaultValue={userData.name}
+              error={errors.name}
               {...register("name")}
             />
           </GridItem>
@@ -174,6 +175,7 @@ export default function EditUser({ userData }: any) {
               name="document"
               label="Cpf"
               defaultValue={userData.document}
+              error={errors.document}
               {...register("document")}
             />
           </GridItem>
@@ -183,6 +185,7 @@ export default function EditUser({ userData }: any) {
               name="date_birth"
               label="Data de Nascimento"
               defaultValue={formatDate(userData.date_birth)}
+              error={errors.date_birth}
               {...register("date_birth")}
             />
           </GridItem>
@@ -191,6 +194,7 @@ export default function EditUser({ userData }: any) {
               name="email"
               label="Email"
               defaultValue={userData.email}
+              error={errors.email}
               {...register("email")}
               maxLength={100}
             />
@@ -201,6 +205,7 @@ export default function EditUser({ userData }: any) {
               name="registration"
               label="Identidade"
               defaultValue={userData.registration}
+              error={errors.registration}
               {...register("registration")}
             />
           </GridItem>
@@ -210,11 +215,12 @@ export default function EditUser({ userData }: any) {
               name="tel"
               label="Telefone"
               defaultValue={userData.tel}
+              error={errors.tel}
               {...register("tel")}
             />
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.sex}>
               <FormLabel htmlFor="sex">Sexo</FormLabel>
               <Controller
                 control={control}
