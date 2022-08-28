@@ -129,7 +129,7 @@ const formSchema = yup.object().shape({
     .string()
     .trim()
     .required("Nome Estabelecimento é obrigatório"),
-  nature_expense: yup.string().required("Natureza da Responsta é obrigatório"),
+  nature_expense: yup.number().required("Natureza da Resposta é obrigatório"),
   proposed_value: yup.string().required("Valor é obrigatório"),
   date_proposed: yup
     .string()
@@ -270,7 +270,7 @@ export default function Planning() {
                   </GridItem>
                   <GridItem colSpan={[2, 1]}>
                     <FormControl isInvalid={!!errors.secretary}>
-                      <FormLabel htmlFor="secretary">Secretária</FormLabel>
+                      <FormLabel htmlFor="secretary">Secretaria</FormLabel>
                       <Controller
                         control={control}
                         name="secretary"
