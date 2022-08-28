@@ -105,14 +105,18 @@ export default function Amendments() {
           onSubmit={handleSubmit(() => {})}
         >
           <Stack spacing="4">
-            <Flex>
+            <Flex
+              justify="space-around"
+              flexDirection={["column", "row"]}
+              gap={2}
+              mt="6"
+              alignContent="center"
+            >
               {modais.map((modal) => (
                 <Button
                   onClick={() => handleModalClick(modal)}
                   key={modal}
-                  mx={2}
-                  w="50%"
-                  fontSize="sm"
+                  w="full"
                   bg="blue.400"
                   _hover={{
                     bg: "blue.600",
@@ -121,7 +125,8 @@ export default function Amendments() {
                   {modal}
                 </Button>
               ))}
-
+            </Flex>
+            <Flex>
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -212,27 +217,38 @@ export default function Amendments() {
             </GridItem>
             <Divider />
             <FormLabel htmlFor="acting_data">Novo Projeto de:</FormLabel>
-            <Flex justify="space-around" gap={2} mt="6">
+            <Flex
+              justify="space-around"
+              flexDirection={["column", "row"]}
+              gap={2}
+              mt="6"
+            >
               <Button
-                w="50%"
                 as="a"
-                size="md"
-                fontSize="md"
+                w="full"
+                fontSize={["sm", "md"]}
                 colorScheme="blue"
                 variant="outline"
                 cursor="pointer"
+                _hover={{
+                  color: "white",
+                  bg: "blue.300",
+                }}
                 onClick={() => handlerAdd(pid)}
               >
                 Unidade Básica de Saúde
               </Button>
               <Button
-                w="50%"
                 as="a"
-                size="md"
-                fontSize="md"
+                w="full"
+                fontSize={["sm", "md"]}
                 cursor="pointer"
                 colorScheme="blue"
                 variant="outline"
+                _hover={{
+                  color: "white",
+                  bg: "blue.300",
+                }}
               >
                 Unidade de Saúde Móvel
               </Button>
