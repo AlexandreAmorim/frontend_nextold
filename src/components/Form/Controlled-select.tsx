@@ -4,9 +4,8 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import { FormErrorMessage, FormLabel, FormControl } from "@chakra-ui/react";
+import { FormErrorMessage, FormLabel, FormControl, useColorModeValue } from "@chakra-ui/react";
 import { Select, Props as SelectProps, GroupBase } from "chakra-react-select";
-import { chakraStyles } from "./SelectStyle";
 
 interface ControlledSelectProps<
   FormValues extends FieldValues = FieldValues,
@@ -42,10 +41,22 @@ export function ControlledSelect<
     shouldUnregister,
   });
 
+  const colorModeVm = useColorModeValue("white", "gray.900");
+
   return (
     <FormControl label={label} isInvalid={!!error} id={name}>
       {label && <FormLabel>{label}</FormLabel>}
-      <Select chakraStyles={chakraStyles} options={options} {...selectProps} {...field} />
+      <Select
+        chakraStyles={{
+          container: (provided) => ({
+            ...provided,
+            background: colorModeVm
+          })
+        }}
+        options={options}
+        {...selectProps}
+        {...field}
+      />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
   );
