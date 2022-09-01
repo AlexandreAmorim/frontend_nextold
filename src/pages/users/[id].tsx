@@ -73,6 +73,8 @@ const formSchema = yup.object().shape({
 
 export default function EditUser({ userData }: any) {
   const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorModeVm = useColorModeValue("white", "gray.900");
+
   const toast = useToast();
   const router = useRouter();
   const [roles, setRoles] = useState<IRole[]>([]);
@@ -227,9 +229,9 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      control: (provided) => ({
+                      container: (provided) => ({
                         ...provided,
-                        background: useColorModeValue("white", "gray.900")
+                        background: colorModeVm
                       })
                     }}
                     instanceId="sex"
@@ -252,9 +254,9 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      control: (provided) => ({
+                      container: (provided) => ({
                         ...provided,
-                        background: useColorModeValue("white", "gray.900")
+                        background: colorModeVm
                       })
                     }}
                     instanceId="active"
@@ -277,9 +279,9 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      control: (provided) => ({
+                      container: (provided) => ({
                         ...provided,
-                        background: useColorModeValue("white", "gray.900")
+                        background: colorModeVm
                       })
                     }}
                     instanceId="roles"
