@@ -227,7 +227,7 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      container: (provided) => ({
+                      control: (provided) => ({
                         ...provided,
                         background: useColorModeValue("white", "gray.900")
                       })
@@ -252,7 +252,7 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      container: (provided) => ({
+                      control: (provided) => ({
                         ...provided,
                         background: useColorModeValue("white", "gray.900")
                       })
@@ -277,7 +277,7 @@ export default function EditUser({ userData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      container: (provided) => ({
+                      control: (provided) => ({
                         ...provided,
                         background: useColorModeValue("white", "gray.900")
                       })

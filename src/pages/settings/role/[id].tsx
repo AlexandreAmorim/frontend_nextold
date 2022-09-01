@@ -126,7 +126,7 @@ export default function EditRole({ roleData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      container: (provided) => ({
+                      control: (provided) => ({
                         ...provided,
                         background: useColorModeValue("white", "gray.900")
                       })
