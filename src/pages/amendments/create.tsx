@@ -110,7 +110,8 @@ export default function CreateAmendments() {
                     render={({ field: { onChange, value, ref } }) => (
                       <SelectChakra
                         chakraStyles={{
-                          container: () => ({
+                          container: (provided) => ({
+                            ...provided,
                             background: useColorModeValue("white", "gray.900")
                           })
                         }}
@@ -139,7 +140,8 @@ export default function CreateAmendments() {
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
                           chakraStyles={{
-                            container: () => ({
+                            container: (provided) => ({
+                              ...provided,
                               background: useColorModeValue("white", "gray.900")
                             })
                           }}
@@ -169,7 +171,8 @@ export default function CreateAmendments() {
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
                           chakraStyles={{
-                            container: () => ({
+                            container: (provided) => ({
+                              ...provided,
                               background: useColorModeValue("white", "gray.900")
                             })
                           }}

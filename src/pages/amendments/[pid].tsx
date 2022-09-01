@@ -25,7 +25,6 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { chakraStyles } from "../../components/Form/SelectStyle";
 
 type ErrorApi = {
   options: string;
@@ -177,7 +176,8 @@ export default function Amendments() {
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
                       chakraStyles={{
-                        container: () => ({
+                        container: (provided) => ({
+                          ...provided,
                           background: useColorModeValue("white", "gray.900")
                         })
                       }}
@@ -200,7 +200,8 @@ export default function Amendments() {
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
                       chakraStyles={{
-                        container: () => ({
+                        container: (provided) => ({
+                          ...provided,
                           background: useColorModeValue("white", "gray.900")
                         })
                       }}
