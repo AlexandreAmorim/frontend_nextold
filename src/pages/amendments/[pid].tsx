@@ -37,12 +37,14 @@ const consolidatesOptions = [
 ];
 
 export default function Amendments() {
+  const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorModeVm = useColorModeValue("white", "gray.900");
+
   const router = useRouter();
   const [data, setData] = useState<IOption[]>([]);
   const { pid } = router.query;
   const { handleSubmit, formState, control } = useForm();
   const { errors } = formState;
-  const colorMode = useColorModeValue("gray.50", "gray.900");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [optionModal, setOptionModal] = useState("");
 
@@ -176,9 +178,9 @@ export default function Amendments() {
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
                       chakraStyles={{
-                        control: (provided) => ({
+                        container: (provided) => ({
                           ...provided,
-                          background: useColorModeValue("white", "gray.900")
+                          background: colorModeVm
                         })
                       }}
                       instanceId="acting"
@@ -200,9 +202,9 @@ export default function Amendments() {
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
                       chakraStyles={{
-                        control: (provided) => ({
+                        container: (provided) => ({
                           ...provided,
-                          background: useColorModeValue("white", "gray.900")
+                          background: colorModeVm
                         })
                       }}
                       instanceId="acting_data"

@@ -30,6 +30,8 @@ const formSchema = yup.object().shape({
 
 export default function EditRole({ roleData }: any) {
   const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorModeVm = useColorModeValue("white", "gray.900");
+
   const toast = useToast();
   const router = useRouter();
   const [permissions, setPermissions] = useState<IPermission[]>([]);
@@ -126,9 +128,9 @@ export default function EditRole({ roleData }: any) {
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
                     chakraStyles={{
-                      control: (provided) => ({
+                      container: (provided) => ({
                         ...provided,
-                        background: useColorModeValue("white", "gray.900")
+                        background: colorModeVm
                       })
                     }}
                     instanceId="permissions"

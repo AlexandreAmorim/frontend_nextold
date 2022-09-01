@@ -140,8 +140,8 @@ export default function Planning() {
   const [acting, setActing] = useState<IOption[]>([]);
   const [coordinate, setCoordinate] = useState<any>([]);
 
-  const colorModeTextarea = useColorModeValue("white", "gray.900");
   const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorModeVm = useColorModeValue("white", "gray.900");
 
   const {
     handleSubmit,
@@ -276,9 +276,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="secretary"
@@ -301,9 +301,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="typework"
@@ -328,9 +328,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="size"
@@ -354,9 +354,9 @@ export default function Planning() {
                   <GridItem colSpan={2}>
                     <FormLabel htmlFor="justification">Justificativa</FormLabel>
                     <Textarea
-                      bgColor={colorModeTextarea}
+                      bgColor={colorModeVm}
                       _hover={{
-                        bgColor: { colorModeTextarea }
+                        bgColor: { colorModeVm }
                       }}
                       name="justification"
                       placeholder="Uma breve descrição"
@@ -387,9 +387,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="city"
@@ -443,9 +443,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="parliamentary"
@@ -472,9 +472,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="budget_action"
@@ -518,9 +518,9 @@ export default function Planning() {
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
                             chakraStyles={{
-                              control: (provided) => ({
+                              container: (provided) => ({
                                 ...provided,
-                                background: useColorModeValue("white", "gray.900")
+                                background: colorModeVm
                               })
                             }}
                             instanceId="nature_expense"

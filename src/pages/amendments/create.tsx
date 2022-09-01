@@ -27,6 +27,7 @@ export default function CreateAmendments() {
   const { handleSubmit, formState, reset, control } = useForm();
   const { errors } = formState;
   const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorModeVm = useColorModeValue("white", "gray.900");
 
   const handlerClear = useCallback(() => {
     setStrategic(null);
@@ -110,9 +111,9 @@ export default function CreateAmendments() {
                     render={({ field: { onChange, value, ref } }) => (
                       <SelectChakra
                         chakraStyles={{
-                          control: (provided) => ({
+                          container: (provided) => ({
                             ...provided,
-                            background: useColorModeValue("white", "gray.900")
+                            background: colorModeVm
                           })
                         }}
                         instanceId="acting_data"
@@ -140,9 +141,9 @@ export default function CreateAmendments() {
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
                           chakraStyles={{
-                            control: (provided) => ({
+                            container: (provided) => ({
                               ...provided,
-                              background: useColorModeValue("white", "gray.900")
+                              background: colorModeVm
                             })
                           }}
                           instanceId="strategic_data"
@@ -171,9 +172,9 @@ export default function CreateAmendments() {
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
                           chakraStyles={{
-                            control: (provided) => ({
+                            container: (provided) => ({
                               ...provided,
-                              background: useColorModeValue("white", "gray.900")
+                              background: colorModeVm
                             })
                           }}
                           instanceId="coordinates_data"
