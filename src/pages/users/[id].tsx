@@ -28,6 +28,7 @@ import { Select as SelectChakra } from "chakra-react-select";
 import { AxiosError } from "axios";
 import { queryClient } from "../../services/queryClient";
 import { Layout } from "../../components/Layout";
+import { chakraStyles } from "../../components/Form/SelectStyle";
 
 interface CreateUserFormData {
   id: string;
@@ -69,7 +70,6 @@ const formSchema = yup.object().shape({
     .trim()
     .required("E-mail obrigatório")
     .email("E-mail inválido"),
-  registration: yup.string().required("Identidade obrigatório"),
 });
 
 export default function EditUser({ userData }: any) {
@@ -205,7 +205,6 @@ export default function EditUser({ userData }: any) {
               name="registration"
               label="Identidade"
               defaultValue={userData.registration}
-              error={errors.registration}
               {...register("registration")}
             />
           </GridItem>
@@ -228,11 +227,11 @@ export default function EditUser({ userData }: any) {
                 name="sex"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="sex"
-                    id="sex"
+                    chakraStyles={chakraStyles}
+                    instanceId="sex"
                     ref={ref}
                     value={sexoOptions.find((c) => value === c.value)}
-                    onChange={(val) => onChange(val.value)}
+                    onChange={(val: any) => onChange(val.value)}
                     options={sexoOptions}
                   />
                 )}
@@ -240,7 +239,7 @@ export default function EditUser({ userData }: any) {
             </FormControl>
           </GridItem>
           <GridItem colSpan={[2, 1]}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.active}>
               <FormLabel htmlFor="active">Status </FormLabel>
               <Controller
                 control={control}
@@ -248,11 +247,11 @@ export default function EditUser({ userData }: any) {
                 name="active"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="active"
-                    id="active"
+                    chakraStyles={chakraStyles}
+                    instanceId="active"
                     ref={ref}
                     value={activeOptions.find((c) => value === c.value)}
-                    onChange={(val) => onChange(val.value)}
+                    onChange={(val: any) => onChange(val.value)}
                     options={activeOptions}
                   />
                 )}
@@ -260,7 +259,7 @@ export default function EditUser({ userData }: any) {
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors}>
+            <FormControl isInvalid={!!errors.roles}>
               <FormLabel htmlFor="roles">Função</FormLabel>
               <Controller
                 control={control}
@@ -268,10 +267,11 @@ export default function EditUser({ userData }: any) {
                 name="roles"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="roles"
+                    chakraStyles={chakraStyles}
+                    instanceId="roles"
                     ref={ref}
                     value={roles.filter((c: any) => value.includes(c.value))}
-                    onChange={(val) => onChange(val.map((c: any) => c.value))}
+                    onChange={(val: any) => onChange(val.map((c: any) => c.value))}
                     options={roles}
                     isMulti
                   />
@@ -285,6 +285,9 @@ export default function EditUser({ userData }: any) {
               w="full"
               bg="blue.500"
               color="white"
+              _hover={{
+                bg: "blue.600",
+              }}
               isLoading={formState.isSubmitting}
             >
               Salvar

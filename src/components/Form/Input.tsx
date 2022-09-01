@@ -19,12 +19,22 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { name, label, error = null, ...rest },
   ref
 ) => {
-  const colorMode = useColorModeValue("gray.50", "gray.900");
+  const colorMode = useColorModeValue("white", "gray.900");
+
   return (
     <FormControl isInvalid={!!error}>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
 
-      <ChakraInput name={name} id={name} ref={ref} {...rest} />
+      <ChakraInput
+        name={name}
+        id={name}
+        ref={ref}
+        bgColor={colorMode}
+        _hover={{
+          bgColor: { colorMode }
+        }}
+        {...rest}
+      />
 
       {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>

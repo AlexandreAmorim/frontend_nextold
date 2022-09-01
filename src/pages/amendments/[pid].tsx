@@ -3,9 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { api } from "../../services/apiClient";
 import { Select as SelectChakra } from "chakra-react-select";
 import { Controller, useForm } from "react-hook-form";
-import { RiAddLine } from "react-icons/ri";
 import { Layout } from "../../components/Layout";
-import Link from "next/link";
 import { IOption } from "../../interface";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import {
@@ -15,8 +13,6 @@ import {
   FormLabel,
   GridItem,
   Stack,
-  Icon,
-  Box,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -24,12 +20,12 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useToast,
   useColorModeValue,
   Divider,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { chakraStyles } from "../../components/Form/SelectStyle";
 
 type ErrorApi = {
   options: string;
@@ -43,7 +39,6 @@ const consolidatesOptions = [
 
 export default function Amendments() {
   const router = useRouter();
-  const toast = useToast();
   const [data, setData] = useState<IOption[]>([]);
   const { pid } = router.query;
   const { handleSubmit, formState, control } = useForm();
@@ -60,7 +55,6 @@ export default function Amendments() {
           value: acting.id,
           label: `${acting.project}`,
         }));
-        console.log(actingOp);
         setData(actingOp);
       }
     }
@@ -102,7 +96,7 @@ export default function Amendments() {
           borderRadius={8}
           p={[6, 8]}
           flexDirection="column"
-          onSubmit={handleSubmit(() => {})}
+          onSubmit={handleSubmit(() => { })}
         >
           <Stack spacing="4">
             <Flex
@@ -117,10 +111,7 @@ export default function Amendments() {
                   onClick={() => handleModalClick(modal)}
                   key={modal}
                   w="full"
-                  bg="blue.400"
-                  _hover={{
-                    bg: "blue.600",
-                  }}
+                  colorScheme="blue"
                 >
                   {modal}
                 </Button>
@@ -185,10 +176,10 @@ export default function Amendments() {
                   name="acting"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
-                      inputId="acting"
-                      id="acting"
+                      chakraStyles={chakraStyles}
+                      instanceId="acting"
                       ref={ref}
-                      onChange={(v) => onChange(v.value)}
+                      onChange={(v: any) => onChange(v.value)}
                       options={consolidatesOptions}
                       value={consolidatesOptions.find((c) => value === c.value)}
                     />
@@ -204,10 +195,10 @@ export default function Amendments() {
                   name="acting_data"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
-                      inputId="acting_data"
-                      id="acting_data"
+                      chakraStyles={chakraStyles}
+                      instanceId="acting_data"
                       ref={ref}
-                      onChange={(v) => onChange(v.value, handleActingChange(v))}
+                      onChange={(v: any) => onChange(v.value, handleActingChange(v))}
                       options={data}
                       value={data.find((c) => value === c.value)}
                     />
@@ -230,10 +221,6 @@ export default function Amendments() {
                 colorScheme="blue"
                 variant="outline"
                 cursor="pointer"
-                _hover={{
-                  color: "white",
-                  bg: "blue.300",
-                }}
                 onClick={() => handlerAdd(pid)}
               >
                 Unidade Básica de Saúde
@@ -245,10 +232,6 @@ export default function Amendments() {
                 cursor="pointer"
                 colorScheme="blue"
                 variant="outline"
-                _hover={{
-                  color: "white",
-                  bg: "blue.300",
-                }}
               >
                 Unidade de Saúde Móvel
               </Button>

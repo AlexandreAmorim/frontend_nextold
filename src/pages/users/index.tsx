@@ -69,7 +69,7 @@ export default function Users() {
   }
 
   return (
-    <Layout title="Usuarios">
+    <Layout title="Usuários">
       <Flex
         borderRadius={8}
         bg={colorMode}
@@ -94,6 +94,9 @@ export default function Users() {
               mx="2"
               bg="blue.500"
               color="white"
+              _hover={{
+                bg: "blue.600",
+              }}
               disabled={isLoading}
               isLoading={isLoading}
               type="submit"
@@ -108,6 +111,9 @@ export default function Users() {
               fontSize="md"
               bg="blue.500"
               color="white"
+              _hover={{
+                bg: "blue.600",
+              }}
               leftIcon={<Icon as={RiAddLine} fontSize="20" />}
             >
               Novo

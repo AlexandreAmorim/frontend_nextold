@@ -6,6 +6,7 @@ import {
   FormLabel,
   Input as ChakraInput,
   InputProps as ChakraInputProps,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import InputMask from "react-input-mask";
 
@@ -20,6 +21,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { name, label, error = null, mask, ...rest },
   ref
 ) => {
+  const colorMode = useColorModeValue("white", "gray.900");
+
   return (
     <FormControl isInvalid={!!error}>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
@@ -27,10 +30,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       <ChakraInput
         as={InputMask}
         mask={mask}
-        maskPlaceholder={null}
         name={name}
         id={name}
         ref={ref}
+        bgColor={colorMode}
+        _hover={{
+          bgColor: { colorMode }
+        }}
         {...rest}
       />
 

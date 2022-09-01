@@ -25,6 +25,7 @@ import Select from "react-select";
 
 import { Select as SelectChakra } from "chakra-react-select";
 import { Layout } from "../../../components/Layout";
+import { chakraStyles } from "../../../components/Form/SelectStyle";
 
 const formSchema = yup.object().shape({
   name: yup.string().trim().required("Nome é obrigatório"),
@@ -128,12 +129,13 @@ export default function EditRole({ roleData }: any) {
                 name="permissions"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="permissions"
+                    chakraStyles={chakraStyles}
+                    instanceId="permissions"
                     ref={ref}
                     value={permissions.filter((c: any) =>
                       value.includes(c.value)
                     )}
-                    onChange={(val) => onChange(val.map((c: any) => c.value))}
+                    onChange={(val: any) => onChange(val.map((c: any) => c.value))}
                     options={permissions}
                     isMulti
                   />

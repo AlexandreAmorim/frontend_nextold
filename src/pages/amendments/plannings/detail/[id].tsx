@@ -9,20 +9,26 @@ import {
 } from "@chakra-ui/react";
 import { setupAPIClient } from "../../../../services/api";
 import { withSSRAuth } from "../../../../utils/withSSRAuth";
-import { useEffect, useState } from "react";
-import { api } from "../../../../services/apiClient";
-import { IOption, IActing } from "../../../../interface";
-import { useRouter } from "next/router";
+import { IOption } from "../../../../interface";
 import { Layout } from "../../../../components/Layout";
 
 interface IPlanningPageProps {
   planningData: {
     id: string;
-    budget_action: string;
-    nature_expense: string;
-    component: string;
-    size: string;
-    justification: string;
+    project: string,
+    name: string,
+    secretary: string,
+    type_work: string,
+    budget_action: string,
+    nature_expense: string,
+    component: string,
+    size: string,
+    justification: string,
+    cnpj: string,
+    parliamentary: string,
+    proposed_value: string,
+    date_proposed: string,
+    createdAt: string,
     coordinates: {
       id: string;
       name: string;
@@ -41,27 +47,58 @@ interface IPlanningPageProps {
     };
     addresses: {
       name: string;
+      city: string;
+      neighborhood: string;
     };
   };
 }
 
+const typeworkOptions = [
+  { value: 1, label: "Construção" },
+  { value: 2, label: "Ampliação" },
+  { value: 3, label: "Reforma" },
+];
+
+const parliamentaryOptions = [
+  { value: 1, label: "Alessandro Molon - PSB - Titular" },
+  { value: 2, label: "Altineu Côrtes - PL - Titular" },
+  { value: 3, label: "Carlos Jordy - PL - Titular" },
+];
+
+const budgetactionOptions = [
+  { value: 1, label: "Ação I" },
+  { value: 2, label: "Ação II" },
+  { value: 3, label: "Ação III" },
+];
+
+const natureexpenseOptions = [
+  { value: 1, label: "GND 3" },
+  { value: 2, label: "GND 4" },
+];
+
 export default function DetailPlanning({ planningData }: IPlanningPageProps) {
-  const [consolidate, setConsolidate] = useState<IOption[]>([]);
   const colorMode = useColorModeValue("gray.50", "gray.900");
 
-  useEffect(() => {
-    async function loadConsolidates() {
-      const { status, data } = await api.get("consolidates");
-      if (status === 200) {
-        const consolidateOp = data.map((consolidate: IActing) => ({
-          value: consolidate.id,
-          label: consolidate.name,
-        }));
-        setConsolidate(consolidateOp);
-      }
-    }
-    loadConsolidates();
-  }, []);
+  const planning = {
+    secretary: planningData?.coordinates?.strategic?.acting?.name,
+    strategic: planningData?.coordinates?.strategic?.name,
+    coordinates: planningData?.coordinates?.name,
+    project: planningData?.project,
+    secretaryEt: planningData?.secretary,
+    cnpj: planningData?.cnpj,
+    proposed_value: planningData?.proposed_value,
+
+    date_proposed: new Date(planningData?.date_proposed).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }),
+
+    budget_action: budgetactionOptions.filter((p: IOption) => p.value === planningData?.budget_action),
+    nature_expense: natureexpenseOptions.filter((p: IOption) => p.value === planningData?.nature_expense),
+    parliamentary: parliamentaryOptions.filter((p: IOption) => p.value === planningData?.parliamentary),
+    type_work: typeworkOptions.filter((p: IOption) => p.value === planningData?.type_work),
+  }
 
   return (
     <Layout title="Emendas Parlamentares">
@@ -74,34 +111,48 @@ export default function DetailPlanning({ planningData }: IPlanningPageProps) {
           mb={4}
         >
           <Heading size="sm">
-            Secretária: {planningData.coordinates.strategic.acting.name}
+            Secretária: {planning?.secretary}
           </Heading>
           <Heading size="sm">
-            Programas Estratégicos: {planningData.coordinates.strategic.name}
+            Programas Estratégicos: {planning?.strategic}
           </Heading>
           <Heading size="sm">
-            Ações Coordenadas: {planningData.coordinates.name}
+            Ações Coordenadas: {planning?.coordinates}
           </Heading>
           <Divider my="2" />
           <SimpleGrid columns={2} columnGap={3}>
-            <Text>Ação Orçamentária: {planningData.budget_action}</Text>
-            <Text>Natureza de Despeza: {planningData.nature_expense}</Text>
-            <Text>Porte: {planningData.size}</Text>
-            <Text>Componente: {planningData.component}</Text>
-            <Text>Justificativa: {planningData.justification}</Text>
+            <Text>Nome do Projeto: {planning?.project}</Text>
+            <Text>Secretaria: {planning?.secretary}</Text>
+            <Text>Tipo de Obra: {planning?.type_work[0].label}</Text>
+            <Text>Porte: {planningData?.size}</Text>
+            <Text>Componente: {planningData?.component}</Text>
+            <Text>Justificativa: {planningData?.justification}</Text>
           </SimpleGrid>
           <Divider my="2" />
           <SimpleGrid columns={2} columnGap={3}>
-            <Text>Endereço: {planningData.addresses.name}</Text>
+            <Text>Cnpj: {planning?.cnpj}</Text>
+            <Text>Parlamentar: {planning?.parliamentary[0]?.label}</Text>
+            <Text>Ação Orçamentária: {planning?.budget_action[0]?.label}</Text>
+            <Text>Valor Proposta: {planning?.proposed_value}</Text>
+            <Text>Data da Proposta: {planning?.date_proposed}</Text>
+            <Text>Natureza de Resposta: {planning?.nature_expense[0]?.label}</Text>
+          </SimpleGrid>
+          <Divider my="2" />
+          <SimpleGrid columns={1} >
+            <Text>Endereço: {planningData?.addresses?.name} - {planningData?.addresses?.neighborhood}</Text>
+            <Text>Bairro: {planningData?.addresses?.city}</Text>
+          </SimpleGrid>
+          <Divider my="2" />
+          <SimpleGrid columns={2} columnGap={3}>
             <Text>
               Situação:{" "}
-              {planningData.consolidates.name === "ABERTO" ? (
+              {planningData?.consolidates?.name === "ABERTO" ? (
                 <Badge colorScheme="green">
-                  <Heading size="sm">{planningData.consolidates.name}</Heading>
+                  {planningData?.consolidates?.name}
                 </Badge>
               ) : (
                 <Badge colorScheme="purple">
-                  <Heading size="sm">{planningData.consolidates.name}</Heading>
+                  {planningData?.consolidates?.name}
                 </Badge>
               )}
             </Text>

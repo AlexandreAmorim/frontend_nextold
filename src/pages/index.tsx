@@ -25,7 +25,8 @@ const signInFormSchema = yup.object().shape({
 });
 
 export default function Home() {
-  const colorMode = useColorModeValue("brand.50", "gray.900");
+  const colorMode = useColorModeValue("gray.50", "gray.900");
+
   const { signIn } = useContext(AuthContext);
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signInFormSchema),
@@ -45,7 +46,6 @@ export default function Home() {
       alignItems="center"
       justifyContent="center"
       flexDirection={["column", "row"]}
-      bg={colorMode}
     >
       <Stack p={[6, 8]} spacing="4" mr={[0, 0, 0, 100]}>
         <Text
@@ -85,7 +85,7 @@ export default function Home() {
             label="E-mail"
             name="email"
             type="email"
-            {...register("email")}
+            error={errors.email}
             {...register("email")}
           />
           <Input

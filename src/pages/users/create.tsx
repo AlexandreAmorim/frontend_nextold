@@ -27,6 +27,7 @@ import { Select as SelectChakra } from "chakra-react-select";
 
 import { AxiosError } from "axios";
 import { Layout } from "../../components/Layout";
+import { chakraStyles } from "../../components/Form/SelectStyle";
 
 interface CreateUserFormData {
   id: string;
@@ -68,10 +69,8 @@ const formSchema = yup.object().shape({
     .trim()
     .required("E-mail obrigatório")
     .email("E-mail inválido"),
-  registration: yup.string().required("Identidade obrigatório"),
   sex: yup.string().required().typeError("Sexo é obrigatório"),
-  active: yup.boolean().required().typeError("Ativo é obrigatório"),
-  roles: yup.array().required().typeError("Permissão é obrigatório"),
+  active: yup.boolean().required().typeError("Ativo é obrigatório")
 });
 
 export default function CreateUser() {
@@ -220,11 +219,11 @@ export default function CreateUser() {
                 name="sex"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="sex"
-                    id="sex"
+                    chakraStyles={chakraStyles}
+                    instanceId="sex"
                     ref={ref}
                     value={sexoOptions.find((c) => value === c.value)}
-                    onChange={(val) => onChange(val.value)}
+                    onChange={(val: any) => onChange(val.value)}
                     options={sexoOptions}
                   />
                 )}
@@ -240,11 +239,11 @@ export default function CreateUser() {
                 name="active"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="active"
-                    id="active"
+                    chakraStyles={chakraStyles}
+                    instanceId="active"
                     ref={ref}
                     value={activeOptions.find((c) => value === c.value)}
-                    onChange={(val) => onChange(val.value)}
+                    onChange={(val: any) => onChange(val.value)}
                     options={activeOptions}
                   />
                 )}
@@ -260,10 +259,11 @@ export default function CreateUser() {
                 name="roles"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    inputId="roles"
+                    chakraStyles={chakraStyles}
+                    instanceId="roles"
                     ref={ref}
                     value={roles.filter((c: any) => value.includes(c.value))}
-                    onChange={(val) => onChange(val.map((c: any) => c.value))}
+                    onChange={(val: any) => onChange(val.map((c: any) => c.value))}
                     options={roles}
                     isMulti
                   />
@@ -278,6 +278,9 @@ export default function CreateUser() {
               w="full"
               bg="blue.500"
               color="white"
+              _hover={{
+                bg: "blue.600",
+              }}
               isLoading={formState.isSubmitting}
             >
               Salvar

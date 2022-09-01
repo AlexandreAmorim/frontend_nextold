@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import { Select as SelectChakra } from "chakra-react-select";
 import { Layout } from "../../components/Layout";
+import { chakraStyles } from "../../components/Form/SelectStyle";
 
 export default function CreateAmendments() {
   const router = useRouter();
@@ -109,10 +110,10 @@ export default function CreateAmendments() {
                     defaultValue={acting.map((c) => c.value)}
                     render={({ field: { onChange, value, ref } }) => (
                       <SelectChakra
-                        inputId="acting_data"
-                        id="acting_data"
+                        chakraStyles={chakraStyles}
+                        instanceId="acting_data"
                         ref={ref}
-                        onChange={(v) =>
+                        onChange={(v: any) =>
                           onChange(v.value, handleActingChange(v))
                         }
                         options={acting}
@@ -134,10 +135,10 @@ export default function CreateAmendments() {
                       name="strategic_data"
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
-                          inputId="strategic_data"
-                          id="strategic_data"
+                          chakraStyles={chakraStyles}
+                          instanceId="strategic_data"
                           ref={ref}
-                          onChange={(v) =>
+                          onChange={(v: any) =>
                             onChange(v.value, handleStrategicChange(v))
                           }
                           options={strategic}
@@ -160,11 +161,11 @@ export default function CreateAmendments() {
                       name="coordinates_data"
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
-                          inputId="coordinates_data"
-                          id="coordinates_data"
+                          chakraStyles={chakraStyles}
+                          instanceId="coordinates_data"
                           ref={ref}
                           value={coordinate.find((c) => value === c.value)}
-                          onChange={(v) => onChange(v.value, setButton(true))}
+                          onChange={(v: any) => onChange(v.value, setButton(true))}
                           options={coordinate}
                           isDisabled={!coordinate}
                         />
@@ -177,11 +178,6 @@ export default function CreateAmendments() {
             <Flex justify="space-around" gap={2} mt="6">
               <Button
                 w="full"
-                bg="blue.200"
-                color="gray.900"
-                _hover={{
-                  bg: "gray.300",
-                }}
                 onClick={handlerClear}
               >
                 Limpar
@@ -189,11 +185,7 @@ export default function CreateAmendments() {
               <Button
                 type="submit"
                 w="full"
-                bg="blue.500"
-                color="white"
-                _hover={{
-                  bg: "blue.600",
-                }}
+                colorScheme="blue"
                 isLoading={formState.isSubmitting}
                 disabled={!button}
               >

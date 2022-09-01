@@ -13,18 +13,13 @@ import {
   Tabs,
   Textarea,
   useToast,
-  Radio,
-  RadioGroup,
-  Stack,
-  Center,
   FormControl,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import {} from "@chakra-ui/react";
+import { } from "@chakra-ui/react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { setupAPIClient } from "../../../services/api";
 import { withSSRAuth } from "../../../utils/withSSRAuth";
 import { useEffect, useState } from "react";
 import { api } from "../../../services/apiClient";
@@ -39,6 +34,7 @@ import { Select as SelectChakra } from "chakra-react-select";
 import { InputMasked } from "../../../components/Form/InputMasked";
 import { parseDate } from "../../../utils";
 import { InputCurrency } from "../../../components/Form/InputCurrency";
+import { chakraStyles } from "../../../components/Form/SelectStyle";
 
 const cityOptions = [
   { value: "Rio de Janeiro", label: "Rio de Janeiro" },
@@ -144,14 +140,17 @@ export default function Planning() {
   const [type, setType] = useState("UBS");
   const [acting, setActing] = useState<IOption[]>([]);
   const [coordinate, setCoordinate] = useState<any>([]);
+
+  const colorModeTextarea = useColorModeValue("white", "gray.900");
   const colorMode = useColorModeValue("gray.50", "gray.900");
+
   const {
     handleSubmit,
     formState,
     register,
     reset,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -253,9 +252,9 @@ export default function Planning() {
           </Box>
           <Tabs>
             <TabList>
-              <Tab>Projeto</Tab>
-              <Tab>Localização</Tab>
-              <Tab>Emenda</Tab>
+              <Tab key={1}>Projeto</Tab>
+              <Tab key={2}>Localização</Tab>
+              <Tab key={3}>Emenda</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -277,10 +276,10 @@ export default function Planning() {
                         defaultValue={acting.map((c) => c.value)}
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="secretary"
-                            id="secretary"
+                            chakraStyles={chakraStyles}
+                            instanceId="secretary"
                             ref={ref}
-                            onChange={(v) => onChange(v.value)}
+                            onChange={(v: any) => onChange(v.value)}
                             options={acting}
                             value={acting.find((c) => value === c.value)}
                           />
@@ -297,13 +296,13 @@ export default function Planning() {
                         name="typework"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="typework"
-                            id="typework"
+                            chakraStyles={chakraStyles}
+                            instanceId="typework"
                             ref={ref}
                             value={typeworkOptions.find(
                               (c) => value === c.value
                             )}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={typeworkOptions}
                           />
                         )}
@@ -319,11 +318,11 @@ export default function Planning() {
                         name="size"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="size"
-                            id="size"
+                            chakraStyles={chakraStyles}
+                            instanceId="size"
                             ref={ref}
                             value={sizeOptions.find((c) => value === c.value)}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={sizeOptions}
                           />
                         )}
@@ -341,6 +340,10 @@ export default function Planning() {
                   <GridItem colSpan={2}>
                     <FormLabel htmlFor="justification">Justificativa</FormLabel>
                     <Textarea
+                      bgColor={colorModeTextarea}
+                      _hover={{
+                        bgColor: { colorModeTextarea }
+                      }}
                       name="justification"
                       placeholder="Uma breve descrição"
                       {...register("justification")}
@@ -369,11 +372,11 @@ export default function Planning() {
                         name="city"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="city"
-                            id="city"
+                            chakraStyles={chakraStyles}
+                            instanceId="city"
                             ref={ref}
                             value={cityOptions.find((c) => value === c.value)}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={cityOptions}
                           />
                         )}
@@ -420,13 +423,13 @@ export default function Planning() {
                         name="parliamentary"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="parliamentary"
-                            id="parliamentary"
+                            chakraStyles={chakraStyles}
+                            instanceId="parliamentary"
                             ref={ref}
                             value={parliamentaryOptions.find(
                               (c) => value === c.value
                             )}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={parliamentaryOptions}
                           />
                         )}
@@ -444,13 +447,13 @@ export default function Planning() {
                         name="budget_action"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="budget_action"
-                            id="budget_action"
+                            chakraStyles={chakraStyles}
+                            instanceId="budget_action"
                             ref={ref}
                             value={budgetactionOptions.find(
                               (c) => value === c.value
                             )}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={budgetactionOptions}
                           />
                         )}
@@ -485,13 +488,13 @@ export default function Planning() {
                         name="nature_expense"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            inputId="nature_expense"
-                            id="nature_expense"
+                            chakraStyles={chakraStyles}
+                            instanceId="nature_expense"
                             ref={ref}
                             value={natureexpenseOptions.find(
                               (c) => value === c.value
                             )}
-                            onChange={(val) => onChange(val.value)}
+                            onChange={(val: any) => onChange(val.value)}
                             options={natureexpenseOptions}
                           />
                         )}
@@ -505,8 +508,6 @@ export default function Planning() {
           <Flex justify="space-around" gap={2} mt="6">
             <Button
               w="full"
-              bg="blue.200"
-              color="gray.900"
               onClick={() => reset()}
             >
               Limpar
@@ -514,8 +515,7 @@ export default function Planning() {
             <Button
               type="submit"
               w="full"
-              bg="blue.500"
-              color="white"
+              colorScheme="blue"
               isLoading={formState.isSubmitting}
             >
               Salvar

@@ -1,30 +1,49 @@
 import {
-  Box,
   SimpleGrid,
   Button,
   FormControl,
   useToast,
   GridItem,
-  FormLabel,
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Input } from "../../../components/Form/Input";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../../../services/apiClient";
 import { IPermission } from "../../../interface";
-
-import { Select as SelectChakra } from "chakra-react-select";
 import { useRouter } from "next/router";
 import { Layout } from "../../../components/Layout";
+import { ControlledSelect } from "../../../components/Form/Controlled-select";
+
+interface FormValues {
+  name: string;
+  alias: string;
+  permission: IPermission[];
+}
+
+const defaultValues: FormValues = {
+  name: "",
+  alias: "",
+  permission: []
+};
 
 const formSchema = yup.object().shape({
   name: yup.string().trim().required("Nome é obrigatório"),
   alias: yup.string().trim().required("Alias é obrigatório"),
+  permission: yup
+    .array()
+    .required("Permissão é obrigatório")
+    .min(1, "Mínimo uma permissão")
+    .of(
+      yup.object().shape({
+        label: yup.string().required(),
+        value: yup.string().required(),
+      })
+    ),
 });
 
 export default function Role() {
@@ -32,8 +51,9 @@ export default function Role() {
   const toast = useToast();
   const router = useRouter();
   const [permissions, setPermissions] = useState<IPermission[]>([]);
-  const { register, handleSubmit, reset, formState, control } = useForm({
+  const { register, handleSubmit, reset, formState, control } = useForm<FormValues>({
     resolver: yupResolver(formSchema),
+    defaultValues
   });
 
   const { errors } = formState;
@@ -52,7 +72,12 @@ export default function Role() {
 
   const handlerRolePermission = useCallback(
     async (payload: any) => {
-      const { status } = await api.post("roles", payload);
+      const _payload = {
+        ...payload,
+        permissions: payload.permission ? payload.permission.map((role: any) => role.value) : [],
+      }
+      const { status } = await api.post("roles", _payload);
+
       if (status === 201) {
         toast({
           title: "Sucesso",
@@ -61,7 +86,7 @@ export default function Role() {
           duration: 5000,
           isClosable: true,
         });
-        reset();
+        reset(defaultValues);
         router.push("/settings");
       }
     },
@@ -96,26 +121,14 @@ export default function Role() {
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors.permissions}>
-              <FormLabel htmlFor="permissions">Permissões</FormLabel>
-              <Controller
-                control={control}
-                name="permissions"
-                defaultValue={permissions.map((c: any) => c.value)}
-                render={({ field: { onChange, value, ref } }) => (
-                  <SelectChakra
-                    inputId="permissions"
-                    ref={ref}
-                    value={permissions.filter((c: any) =>
-                      value.includes(c.value)
-                    )}
-                    onChange={(val) => onChange(val.map((c: any) => c.value))}
-                    options={permissions}
-                    isMulti
-                  />
-                )}
-              />
-            </FormControl>
+            <ControlledSelect<FormValues, IPermission, true>
+              isMulti
+              instanceId="permission"
+              name="permission"
+              control={control}
+              label="Permissões"
+              options={permissions}
+            />
           </GridItem>
           <Link href={`/settings`} passHref>
             <Button>Cancel</Button>
