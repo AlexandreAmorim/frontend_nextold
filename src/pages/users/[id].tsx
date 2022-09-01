@@ -28,7 +28,6 @@ import { Select as SelectChakra } from "chakra-react-select";
 import { AxiosError } from "axios";
 import { queryClient } from "../../services/queryClient";
 import { Layout } from "../../components/Layout";
-import { chakraStyles } from "../../components/Form/SelectStyle";
 
 interface CreateUserFormData {
   id: string;
@@ -227,7 +226,11 @@ export default function EditUser({ userData }: any) {
                 name="sex"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    chakraStyles={chakraStyles}
+                    chakraStyles={{
+                      container: () => ({
+                        background: useColorModeValue("white", "gray.900")
+                      })
+                    }}
                     instanceId="sex"
                     ref={ref}
                     value={sexoOptions.find((c) => value === c.value)}
@@ -247,7 +250,11 @@ export default function EditUser({ userData }: any) {
                 name="active"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    chakraStyles={chakraStyles}
+                    chakraStyles={{
+                      container: () => ({
+                        background: useColorModeValue("white", "gray.900")
+                      })
+                    }}
                     instanceId="active"
                     ref={ref}
                     value={activeOptions.find((c) => value === c.value)}
@@ -267,7 +274,11 @@ export default function EditUser({ userData }: any) {
                 name="roles"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    chakraStyles={chakraStyles}
+                    chakraStyles={{
+                      container: () => ({
+                        background: useColorModeValue("white", "gray.900")
+                      })
+                    }}
                     instanceId="roles"
                     ref={ref}
                     value={roles.filter((c: any) => value.includes(c.value))}

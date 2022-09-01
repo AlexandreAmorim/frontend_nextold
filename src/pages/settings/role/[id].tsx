@@ -20,12 +20,8 @@ import { useCallback, useEffect, useState } from "react";
 import { api } from "../../../services/apiClient";
 import { IPermission } from "../../../interface";
 import { useRouter } from "next/router";
-
-import Select from "react-select";
-
 import { Select as SelectChakra } from "chakra-react-select";
 import { Layout } from "../../../components/Layout";
-import { chakraStyles } from "../../../components/Form/SelectStyle";
 
 const formSchema = yup.object().shape({
   name: yup.string().trim().required("Nome é obrigatório"),
@@ -129,7 +125,11 @@ export default function EditRole({ roleData }: any) {
                 name="permissions"
                 render={({ field: { onChange, value, ref } }) => (
                   <SelectChakra
-                    chakraStyles={chakraStyles}
+                    chakraStyles={{
+                      container: () => ({
+                        background: useColorModeValue("white", "gray.900")
+                      })
+                    }}
                     instanceId="permissions"
                     ref={ref}
                     value={permissions.filter((c: any) =>

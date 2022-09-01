@@ -16,7 +16,6 @@ import { useRouter } from "next/router";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import { Select as SelectChakra } from "chakra-react-select";
 import { Layout } from "../../components/Layout";
-import { chakraStyles } from "../../components/Form/SelectStyle";
 
 export default function CreateAmendments() {
   const router = useRouter();
@@ -110,7 +109,11 @@ export default function CreateAmendments() {
                     defaultValue={acting.map((c) => c.value)}
                     render={({ field: { onChange, value, ref } }) => (
                       <SelectChakra
-                        chakraStyles={chakraStyles}
+                        chakraStyles={{
+                          container: () => ({
+                            background: useColorModeValue("white", "gray.900")
+                          })
+                        }}
                         instanceId="acting_data"
                         ref={ref}
                         onChange={(v: any) =>
@@ -135,7 +138,11 @@ export default function CreateAmendments() {
                       name="strategic_data"
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
-                          chakraStyles={chakraStyles}
+                          chakraStyles={{
+                            container: () => ({
+                              background: useColorModeValue("white", "gray.900")
+                            })
+                          }}
                           instanceId="strategic_data"
                           ref={ref}
                           onChange={(v: any) =>
@@ -161,7 +168,11 @@ export default function CreateAmendments() {
                       name="coordinates_data"
                       render={({ field: { onChange, value, ref } }) => (
                         <SelectChakra
-                          chakraStyles={chakraStyles}
+                          chakraStyles={{
+                            container: () => ({
+                              background: useColorModeValue("white", "gray.900")
+                            })
+                          }}
                           instanceId="coordinates_data"
                           ref={ref}
                           value={coordinate.find((c) => value === c.value)}

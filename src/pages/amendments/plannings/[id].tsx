@@ -34,7 +34,6 @@ import { Select as SelectChakra } from "chakra-react-select";
 import { InputMasked } from "../../../components/Form/InputMasked";
 import { parseDate } from "../../../utils";
 import { InputCurrency } from "../../../components/Form/InputCurrency";
-import { chakraStyles } from "../../../components/Form/SelectStyle";
 
 const cityOptions = [
   { value: "Rio de Janeiro", label: "Rio de Janeiro" },
@@ -276,7 +275,11 @@ export default function Planning() {
                         defaultValue={acting.map((c) => c.value)}
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="secretary"
                             ref={ref}
                             onChange={(v: any) => onChange(v.value)}
@@ -296,7 +299,11 @@ export default function Planning() {
                         name="typework"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="typework"
                             ref={ref}
                             value={typeworkOptions.find(
@@ -318,7 +325,11 @@ export default function Planning() {
                         name="size"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="size"
                             ref={ref}
                             value={sizeOptions.find((c) => value === c.value)}
@@ -372,7 +383,11 @@ export default function Planning() {
                         name="city"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="city"
                             ref={ref}
                             value={cityOptions.find((c) => value === c.value)}
@@ -423,7 +438,11 @@ export default function Planning() {
                         name="parliamentary"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="parliamentary"
                             ref={ref}
                             value={parliamentaryOptions.find(
@@ -447,7 +466,11 @@ export default function Planning() {
                         name="budget_action"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="budget_action"
                             ref={ref}
                             value={budgetactionOptions.find(
@@ -488,7 +511,11 @@ export default function Planning() {
                         name="nature_expense"
                         render={({ field: { onChange, value, ref } }) => (
                           <SelectChakra
-                            chakraStyles={chakraStyles}
+                            chakraStyles={{
+                              container: () => ({
+                                background: useColorModeValue("white", "gray.900")
+                              })
+                            }}
                             instanceId="nature_expense"
                             ref={ref}
                             value={natureexpenseOptions.find(

@@ -176,7 +176,11 @@ export default function Amendments() {
                   name="acting"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
-                      chakraStyles={chakraStyles}
+                      chakraStyles={{
+                        container: () => ({
+                          background: useColorModeValue("white", "gray.900")
+                        })
+                      }}
                       instanceId="acting"
                       ref={ref}
                       onChange={(v: any) => onChange(v.value)}
@@ -195,7 +199,11 @@ export default function Amendments() {
                   name="acting_data"
                   render={({ field: { onChange, value, ref } }) => (
                     <SelectChakra
-                      chakraStyles={chakraStyles}
+                      chakraStyles={{
+                        container: () => ({
+                          background: useColorModeValue("white", "gray.900")
+                        })
+                      }}
                       instanceId="acting_data"
                       ref={ref}
                       onChange={(v: any) => onChange(v.value, handleActingChange(v))}
